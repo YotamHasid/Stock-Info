@@ -47,7 +47,8 @@ async def compare_stocks(symbols: List[str]):
     for symbol in symbols:
         stock_data = await get_stock(symbol)
         if "error" not in stock_data:
-            stocks.append(stock_data.dict())
+            stocks.append(stock_data.model_dump())
+
     
     highest = max(stocks, key=lambda x: x["price"])
     lowest = min(stocks, key=lambda x: x["price"])
