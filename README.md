@@ -1,5 +1,5 @@
 
-# Stock Info Backend
+# Stock Info
 
 This is a backend system that retrieves real-time stock information using the Finnhub API.
 
