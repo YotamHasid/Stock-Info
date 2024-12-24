@@ -43,7 +43,7 @@ docker run -p 8080:8000 stock-info-backend
 Once the container is running, the application will be exposed on port 8080 on your local machine. You can access it via the browser at:
 
 http://127.0.0.1:8080
-
+http://127.0.0.1:8080/docs#/
 
 ### API Key
 Make sure to add your API key to the code so that the application can make requests to the Finnhub API. If you have your API key, use the following:
