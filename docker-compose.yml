@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - API_KEY=ctipj5pr01qgfbsv64f0ctipj5pr01qgfbsv64fg
+    networks:
+      - stock-info-network
+
+networks:
+  stock-info-network:
+    driver: bridge
