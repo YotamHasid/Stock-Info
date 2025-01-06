@@ -1,4 +1,4 @@
-# Stock Info Backend
+# Stock Info 
 
 This is a backend service for a stock information system. The backend is built using FastAPI and connects to external APIs (e.g., Finnhub) to fetch stock data. It also includes caching mechanisms to improve performance and reduce the number of external requests.
 
