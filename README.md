@@ -1,71 +1,96 @@
-Stock-Info
+# Stock Info Backend
 
-This is a full-stack web application designed to provide real-time stock market data. The backend is built using FastAPI and serves as an API that provides various stock-related data such as price, volume, and comparisons. The application is containerized using Docker, and it is easy to deploy and test using Docker and Docker Compose.
+This is a backend service for a stock information system. The backend is built using FastAPI and connects to external APIs (e.g., Finnhub) to fetch stock data. It also includes caching mechanisms to improve performance and reduce the number of external requests.
 
-Features
-Backend (FastAPI): Handles all the business logic and provides RESTful API endpoints for stock data.
-Frontend (React): Displays stock data, enables comparisons, and integrates with the backend to show the user real-time stock information.
-Dockerized: The application is containerized for easy deployment and testing.
-Clone the Repository
-Clone the repository to your local machine:
+## ✨ Features
 
-git clone https://github.com/YotamHasid/stock-info-backend.git cd stock-info-backend
+### For Users
+- 📈 Get real-time stock data, including price, change percentage, and trading volume.
+- 🔍 Compare multiple stocks and find the highest and lowest prices.
+- 📊 Calculate the average stock price for a list of stocks.
 
-Access the Application
-Once the containers are running, you can access the frontend in your browser:
+### General Features
+- 🚀 FastAPI for a high-performance backend.
+- 🕒 Caching of stock data for faster responses .
+- 🧑‍💻 API Documentation available via Swagger UI at `/docs`.
 
-Frontend: Open http://localhost:3000 to view the web application. Backend API: Open http://localhost:8000/docs to interact with the API using Swagger.
+## 🚀 Getting Started
 
-How to Run the Application
-Step 1: Install Dependencies
-Before running the application, you need to install all required dependencies. You can do this by running:
+### Docker Setup (Recommended)
 
+1. Ensure you have Docker installed on your machine.
+2. Clone this repository to your local machine.
+3. Create a `.env` file in the root directory with your `FINNHUB_API_KEY`.
+
+#### Docker Setup
+
+Create a `docker-compose.yml` file in the root directory:
+
+```yaml
+version: '3.8'
+
+services:
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - FINNHUB_API_KEY=your_api_key_here
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+Run the application:
+docker-compose up --build
+
+Access the application:
+Backend API: http://localhost:8000
+API Documentation: http://localhost:8000/docs
+Manual Setup
+Clone this repository to your local machine.
+
+Create a .env file and add the following:
+FINNHUB_API_KEY=your_api_key_here
+
+Install dependencies:
 pip install -r requirements.txt
 
-Step 2: Build the Docker Image
-To build the Docker image, run the following command:
+Run the application:
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
-docker build -t stock-info-backend .
+Access the application:
+Backend API: http://localhost:8000
+API Documentation: http://localhost:8000/docs
 
-Step 3: Run the Docker Container
-After building the image, you can run the container using the following command:
+🏗️ Architecture:
+Backend
+FastAPI: Modern, fast web framework for building APIs with Python.
+Pydantic: Data validation using Python type annotations.
+HTTPX: HTTP client for making asynchronous requests.
 
-docker run -p 8080:8000 stock-info-backend
+📁 Project Structure:
 
-Step 4: Access the Application
-Once the container is running, the application will be exposed on port 8080 on your local machine. You can access it via the browser at:
+app/
+│
+├── main.py         # FastAPI application entry point
+├── models.py       # Pydantic models for stock data
+├── services.py     # Logic for fetching and caching stock data
+└── .env            # Environment variables file (e.g., FINNHUB_API_KEY)
 
-http://127.0.0.1:8080
+📝 API Documentation:
+After running the backend server, visit:
 
-API Key
-Make sure to add your API key to the code so that the application can make requests to the Finnhub API. If you have your API key, use the following:
+Swagger UI: http://localhost:8000/docs
+ReDoc: http://localhost:8000/redoc
 
-API_KEY = "ctipj5pr01qgfbsv64f0ctipj5pr01qgfbsv64fg"
+🛠️ Testing
+Run the backend tests using pytest:
+pytest
 
-Dockerfile
-This project includes a Dockerfile to easily build and run the application in a containerized environment. The Dockerfile contains all the necessary steps to install dependencies, copy the project files, and start the FastAPI server.
-
-API Endpoints
-The system provides several API endpoints, including:
-
-GET /stock/{symbol}
-
-Retrieves the stock information for the given symbol.
-POST /stocks/average
-
-Calculates and returns the average stock price for a list of symbols.
-POST /stocks/compare
-
-Compares multiple stocks and returns the highest and lowest stock based on price.
-Testing the Application
-You can test the application using the /docs endpoint to access the automatically generated Swagger UI for API documentation. From there, you can test all the API functions. or go to: http://127.0.0.1:8080/docs#/
-
-To run automated tests on the application, use the following command: pytest
-
-This will run the test suite, ensuring that all functions are working as expected.
-
-Testing with Docker
-You can run the backend tests inside the Docker container by using the following command: docker-compose exec backend pytest
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+🌟 Contributing:
+Fork the repository.
+Create your feature branch: git checkout -b feature/AmazingFeature.
+Commit your changes: git commit -m 'Add some AmazingFeature'.
+Push to the branch: git push origin feature/AmazingFeature.
+Open a Pull Request.
+👏 Acknowledgments:
+FastAPI documentation
+Finnhub API documentation
